@@ -27,6 +27,12 @@ def check_website(url):
         porcentagem = (headers_presentes / len(security_headers)) * 100
         print(f"Total de cabeçalhos de segurança presentes: {headers_presentes}")
         print(f"Porcentagem de cabeçalhos de segurança presentes: {porcentagem:.2f}%")
+        if porcentagem == 100:
+             print("- Excelente! Todos os cabeçalhos de segurança estão presentes.")
+        elif porcentagem >= 60:
+             print("- Bom! A maioria dos cabeçalhos de segurança estão presentes.")
+        else:
+             print("- Atenção! Muitos cabeçalhos de segurança estão ausentes.")
     except requests.RequestException as e:
         print(f"Erro ao acessar o site: {e}")
 check_website(url)
