@@ -6,11 +6,15 @@ security_headers = [
     "X-Frame-Options",
     "Referrer-Policy"
 ]
+url = input("Digite a URL desejada:")
 def check_website(url):
-    url = input("Digite a URL desejada:")
-    response = requests.get(url)
-    for header in security_headers:
-        if header in response.headers:
-            print(f"{header} está presente.")
-        else:
-            print(f"{header} não está presente.")
+    try:
+        response = requests.get(url, timeout = 5)
+        for header in security_headers:
+            if header in response.headers:
+                print(f"{header} está presente.")
+            else:
+                print(f"{header} não está presente.")
+    except requests.RequestException as e:
+        print(f"Erro ao acessar o site: {e}")
+check_website(url)
